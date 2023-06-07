@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginVC: UIViewController {
     
@@ -21,7 +22,35 @@ class LoginVC: UIViewController {
     
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         //SHOW AN ALERT IF USER IS NOT ABLE TO LOGIN
-        print("Test")
+        if let email = emailTextField.text,
+           let password = passwordTextField.text {
+            
+            Auth.auth().signIn(withEmail: email, password: password) {result, error in
+                if error != nil {
+                    //Show an alert saying "Email or password is incorrect."
+                    self.showIncorrectEmailOrPasswordAlert()
+                    print(error!)
+                    
+                    
+                    
+                } else {
+                    //Segue to MessageVC
+                    
+                    print("Success login user in 🎉")
+                }
+            }
+        }
+    }
+    
+    
+    func showIncorrectEmailOrPasswordAlert() {
+        let alert = UIAlertController(title: "Unable to login", message: "Incorrect email or password", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .default) {alertAction in
+            print("Ok button pressed in the alert")
+        }
+        
+        alert.addAction(action)
+        present(alert, animated: true)
     }
     
     
