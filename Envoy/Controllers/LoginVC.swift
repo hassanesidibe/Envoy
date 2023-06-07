@@ -21,7 +21,7 @@ class LoginVC: UIViewController {
     
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         //SHOW AN ALERT IF USER IS NOT ABLE TO LOGIN
-        
+        print("Test")
     }
     
     
